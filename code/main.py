@@ -16,6 +16,10 @@ def main():
     resource_group = os.environ.get("INPUT_RESOURCE_GROUP", default=None)
     mapped_params = os.environ.get("INPUT_MAPPED_PARAMS", default="{}")
     deployment_mode=os.environ.get("INPUT_DEPLOYMENT_MODE", default="Incremental")
+    deployment_name=os.environ.get("GITHUB_REPOSITORY")
+    
+    deployment_name=deployment_name.split('/')
+    deployment_name=deployment_name[0]+'_'+deployment_name[1]
     
     deploy_enum=get_deploy_mode_obj(deployment_mode)
     try:
@@ -87,20 +91,24 @@ def main():
      }
 
     try:
-        validate=client.deployments.validate(resource_group,"azure-sample",deployment_properties)
+        validate=client.deployments.validate(resource_group,deployment_name,deployment_properties)
         validate.wait()
     except Exception as ex:
-        raise ActionDeploymentError(ex)    
+        raise ActionDeploymentError(ex)
+    deployment_async_operation=None    
     try:
         deployment_async_operation = client.deployments.create_or_update(
                 resource_group,
-                'azure-sample',
+                deployment_name,
                 deployment_properties
             )
         deployment_async_operation.wait()
     except Exception as ex:
         raise ActionDeploymentError(ex)
-    print("Deployment done")
+        
+    deploy_result=deployment_async_operation.result()
+    print(f"::set-output name=deployment_parameters::{deploy_result.properties.parameters}")
+    print(f"::set-output name=deployment_output::{deploy_result.properties.outputs}")
 
 if __name__ == "__main__":
     main()
