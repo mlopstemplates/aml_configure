@@ -16,10 +16,10 @@ def main():
     resource_group = os.environ.get("INPUT_RESOURCE_GROUP", default=None)
     mapped_params = os.environ.get("INPUT_MAPPED_PARAMS", default="{}")
     deployment_mode=os.environ.get("INPUT_DEPLOYMENT_MODE", default="Incremental")
-    repo_name=os.environ.get("GITHUB_REPOSITORY")
+    deployment_name=os.environ.get("GITHUB_REPOSITORY")
     
-    repo_name=repo_name.split('/')
-    repo_name=repo_name[0]+'_'+repo_name[1]
+    deployment_name=deployment_name.split('/')
+    deployment_name=deployment_name[0]+'_'+deployment_name[1]
     
     deploy_enum=get_deploy_mode_obj(deployment_mode)
     try:
@@ -91,7 +91,7 @@ def main():
      }
 
     try:
-        validate=client.deployments.validate(resource_group,repo_name,deployment_properties)
+        validate=client.deployments.validate(resource_group,deployment_name,deployment_properties)
         validate.wait()
     except Exception as ex:
         raise ActionDeploymentError(ex)
@@ -99,7 +99,7 @@ def main():
     try:
         deployment_async_operation = client.deployments.create_or_update(
                 resource_group,
-                repo_name,
+                deployment_name,
                 deployment_properties
             )
         deployment_async_operation.wait()
