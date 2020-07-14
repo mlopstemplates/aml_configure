@@ -21,3 +21,12 @@ jobs:
           armtemplate_file: "deploy.json"
           resource_group: "newR"
           deployment_mode: "Incremental"
+    
+    - name: azure login 
+      uses: azure/login@v1.1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+    
+    - name: Run Az CLI script
+      run: |
+        az resource delete -g newR -n amlconfiguretest001 --resource-type Microsoft.Storage/storageAccounts
