@@ -18,7 +18,7 @@ jobs:
       with:
           azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
           armtemplate_file: "deploy.json"
-          resource_group: a0
+          resource_group: ${{ secrets.R }}
           deployment_mode: "Incremental"
           
     - name: testResources
