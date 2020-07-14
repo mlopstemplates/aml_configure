@@ -21,10 +21,11 @@ jobs:
           armtemplate_file: "deploy.json"
           resource_group: "newR"
           deployment_mode: "Incremental"
+          
     - name: testResources
       id: testOutput
       run: |
-        echo  ${{ steps.aml_configure.outputs.deployment_parameters}}    
+        echo ${{ steps.aml_configure.outputs.deployment_parameters.storageAccountName.value }}   
     - name: azure login 
       uses: azure/login@v1.1
       with:
@@ -32,4 +33,4 @@ jobs:
     
     - name: Run Az CLI script
       run: |
-        echo ${{ steps.aml_configure.outputs.deployment_parameters.storageAccountName.value }}
+        echo ${{ steps.aml_configure.outputs.deployment_parameters }}
