@@ -25,7 +25,9 @@ jobs:
     - name: testResources
       id: testOutput
       run: |
-        echo ${{ steps.aml_configure.outputs.deployment_parameters.storageAccountName}}   
+        a= ${{ steps.aml_configure.outputs.deployment_parameters}} 
+        echo $a
+          
     - name: azure login 
       uses: azure/login@v1.1
       with:
@@ -33,5 +35,5 @@ jobs:
     
     - name: Run Az CLI script
       run: |
-        a= ${{ steps.aml_configure.outputs.deployment_parameters }}
-        echo $a
+       ${{ steps.aml_configure.outputs.deployment_parameters }}.storageAccountName
+
