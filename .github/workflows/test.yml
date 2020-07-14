@@ -29,5 +29,4 @@ jobs:
     
     - name: Run Az CLI script
       run: |
-        echo ${{ steps.aml_configure.outputs.deployment_parameters.storageAccountName.value}}
-        az resource delete -g newR -n ${{ steps.aml_configure.outputs.deployment_parameters.storageAccountName.value}} --resource-type Microsoft.Storage/storageAccounts
+        echo ${{ steps.aml_configure.outputs.deployment_parameters.storageAccountName.value }}
