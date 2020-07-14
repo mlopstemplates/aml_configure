@@ -21,7 +21,10 @@ jobs:
           armtemplate_file: "deploy.json"
           resource_group: "newR"
           deployment_mode: "Incremental"
-    
+    - name: testResources
+      id: testOutput
+      run: |
+        echo  ${{ steps.aml_configure.outputs.deployment_parameters}}    
     - name: azure login 
       uses: azure/login@v1.1
       with:
