@@ -19,7 +19,9 @@ jobs:
           azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
           armtemplateparams_file: "deploy.params.json"
           armtemplate_file: "deploy.json"
-          resource_group: "newR"
+          resource_group: |
+            "newR"
+            "hello"
           deployment_mode: "Incremental"
           
     - name: testResources
@@ -33,4 +35,4 @@ jobs:
     
     - name: Run Az CLI script
       run: |
-        echo ${{ steps.aml_configure.outputs.deployment_parameters }}
+        echo ${{ steps.aml_configure.outputs.deployment_parameters.storageAccountName }}
