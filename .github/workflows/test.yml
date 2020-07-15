@@ -28,5 +28,6 @@ jobs:
     
     - name: Run Az CLI script
       run: |
-       ${{ steps.aml_configure.outputs.deployment_parameters }}.storageAccountName
+       echo "::set-env name=acc_name::${{ steps.aml_configure.outputs.deployment_parameters }}" 
+       az resource delete -g a0 -n ${{ env.repo_name }} --resource-type Microsoft.Storage/storageAccounts
 
