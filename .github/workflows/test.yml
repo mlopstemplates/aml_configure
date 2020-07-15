@@ -19,7 +19,7 @@ jobs:
           azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
           armtemplate_file: "deploy.json"
           resource_group: ${{ secrets.RESOURCE_GROUP }}
-          mapped_params: '{"storageAccountName":"aml_configure0001"}'
+          mapped_params: '{"storageAccountName":"amlconfigure0001"}'
           deployment_mode: "Incremental"
           
     - name: azure login 
@@ -29,5 +29,5 @@ jobs:
     
     - name: Run Az CLI script
       run: |
-       az resource delete -g a0 -n aml_configure0001 --resource-type Microsoft.Storage/storageAccounts
+       az resource delete -g a0 -n amlconfigure0001 --resource-type Microsoft.Storage/storageAccounts
 
