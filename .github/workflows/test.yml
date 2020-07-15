@@ -18,14 +18,8 @@ jobs:
       with:
           azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
           armtemplate_file: "deploy.json"
-          resource_group: ${{ secrets.R }}
+          resource_group: a0
           deployment_mode: "Incremental"
-          
-    - name: testResources
-      id: testOutput
-      run: |
-        a= ${{ steps.aml_configure.outputs.deployment_parameters}} 
-        echo $a
           
     - name: azure login 
       uses: azure/login@v1.1
