@@ -18,7 +18,7 @@ jobs:
       with:
           azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
           armtemplate_file: "deploy.json"
-          resource_group: a0
+          resource_group: ${{ secrets.RESOURCE_GROUP }}
           deployment_mode: "Incremental"
           
     - name: azure login 
@@ -29,5 +29,5 @@ jobs:
     - name: Run Az CLI script
       run: |
        echo "::set-env name=acc_name::${{ steps.aml_configure.outputs.deployment_parameters }}" 
-       az resource delete -g a0 -n ${{ env.repo_name }} --resource-type Microsoft.Storage/storageAccounts
+       az resource delete -g a0 -n ${{ env.acc_name }}.storageAccountName --resource-type Microsoft.Storage/storageAccounts
 
