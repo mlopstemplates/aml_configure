@@ -30,6 +30,7 @@ jobs:
       run: |
        echo acc_name: ${{ steps.aml_configure.outputs.deployment_parameters }}"
        echo  $acc_name
-       echo acc_name.storageAccountName
-       az resource delete -g a0 -n acc_name.storageAccountName --resource-type Microsoft.Storage/storageAccounts
+       x=($(jq .storageAccountName ${{ steps.aml_configure.outputs.deployment_parameters }} )
+       echo $x
+       az resource delete -g a0 -n $x --resource-type Microsoft.Storage/storageAccounts
 
