@@ -17,7 +17,7 @@ def main():
     mapped_params = os.environ.get("INPUT_MAPPED_PARAMS", default="{}")
     deployment_mode=os.environ.get("INPUT_DEPLOYMENT_MODE", default="Incremental")
     deployment_name=os.environ.get("GITHUB_REPOSITORY")
-    
+
     deployment_name=deployment_name.split('/')
     deployment_name=deployment_name[0]+'_'+deployment_name[1]
     

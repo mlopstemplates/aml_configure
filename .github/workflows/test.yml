@@ -17,8 +17,18 @@ jobs:
       uses: ./
       with:
           azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
-          armtemplate_file: "deploy.json"
           armtemplateparams_file: "deploy.params.json"
-          resource_group: "ashkuma_functionAppRsGroup"
-          mapped_params: '{"patToken":"${{secrets.PAT_TOKEN}}"}'
+          armtemplate_file: "deploy.json"
+          resource_group: ${{ secrets.RESOURCE_GROUP }}
+          mapped_params: '{"storageAccountName":"amlconfiguretest"}'
           deployment_mode: "Incremental"
+          
+    - name: azure login 
+      uses: azure/login@v1.1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+    
+    - name: Run Az CLI script
+      run: |
+       az resource delete -g ${{ secrets.RESOURCE_GROUP }} -n amlconfiguretest --resource-type Microsoft.Storage/storageAccounts
+
