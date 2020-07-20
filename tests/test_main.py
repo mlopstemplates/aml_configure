@@ -8,6 +8,7 @@ sys.path.insert(0, os.path.join(myPath, "..", "code"))
 
 from main import main
 from utils import AMLConfigurationException
+from azure.common.credentials import ServicePrincipalCredentials
 
 def get_sample_credentials():
     return """{
@@ -54,5 +55,8 @@ def test_main_invalid_parameters_file():
     with pytest.raises(CredentialsVerificationError):
         assert main()
 
-    
+
+def test_main_invalid_parameters_file():        
+    os.environ["INPUT_AZURE_CREDENTIALS"] =get_sample_credentials()
+    os.environ["INPUT_RESOURCE_GROUP"] = "testGroup"    
         
