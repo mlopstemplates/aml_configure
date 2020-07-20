@@ -65,3 +65,11 @@ def required_parameters_provided(parameters, keys, message="Required parameter n
 def mask_parameter(parameter):
     print(f"::add-mask::{parameter}")
 
+def get_service_principal_credentials(service_principal_id,service_principal_password,tenant_id):
+    return ServicePrincipalCredentials(
+             client_id=service_principal_id,
+             secret=service_principal_password,
+             tenant=tenant_id
+          )
+    
+    
