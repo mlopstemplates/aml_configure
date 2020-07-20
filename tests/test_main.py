@@ -51,7 +51,7 @@ def test_main_invalid_parameters_file():
 
 def test_main_invalid_parameters_filep():        
     os.environ["INPUT_AZURE_CREDENTIALS"] =get_sample_credentials()
-    os.environ["INPUT_MAPPED_PARAMS"] ={"testParams":"testValue"}
+    os.environ["INPUT_MAPPED_PARAMS"] ='{"testParams":"testValue"}'
     os.environ["INPUT_RESOURCE_GROUP"] = "testGroup"
     with pytest.raises(CredentialsVerificationError):
         assert main()
