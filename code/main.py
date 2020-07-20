@@ -2,7 +2,7 @@ import os
 import json
 import time
 from json import JSONDecodeError
-from utils import AMLConfigurationException, ActionDeploymentError, CredentialsVerificationError, ResourceManagementError, required_parameters_provided, mask_parameter, get_template_parameters, get_deploy_mode_obj
+from utils import AMLConfigurationException, ActionDeploymentError, CredentialsVerificationError, ResourceManagementError, required_parameters_provided, mask_parameter, get_template_parameters, get_deploy_mode_obj, get_service_principal_credentials
 from azure.common.credentials import ServicePrincipalCredentials
 from azure.mgmt.resource import ResourceManagementClient
 from azure.mgmt.resource.resources.models import DeploymentMode
