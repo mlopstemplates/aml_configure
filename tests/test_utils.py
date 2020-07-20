@@ -29,7 +29,7 @@ def test_get_template_parameters_mapped_params_added():
 
     
 def test_get_template_parameters_incorrect_parameter_file():
-    with pytest.raises(TemplateParameterException):
+    with pytest.raises(FileNotFoundError):
         assert get_template_parameters("wrongFile.json",{})    
 
       
