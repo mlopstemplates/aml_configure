@@ -11,10 +11,10 @@ from utils import AMLConfigurationException, CredentialsVerificationError
 
 def get_sample_credentials():
     return """{
-        'clientId': 'test',
-        'clientSecret': 'test',
-        'subscriptionId': 'test',
-        'tenantId': 'test'
+        "clientId": "test",
+        "clientSecret": "test",
+        "subscriptionId": "test",
+        "tenantId"': "test"
     }"""  
 
 
@@ -66,10 +66,10 @@ def test_main_invalid_parameters_file():
 
 def test_main_invalid_parameters_filep():        
     os.environ["INPUT_AZURE_CREDENTIALS"] ="""{
-        'clientId': 'test',
-        'clientSecret': 'test',
-        'subscriptionId': 'test',
-        'tenantId': 'test'
+        "clientId": "test",
+        "clientSecret": "test",
+        "subscriptionId": "test",
+        "tenantId"': "test"
     }"""
     os.environ["INPUT_RESOURCE_GROUP"] = "testGroup"
     with pytest.raises(CredentialsVerificationError):
