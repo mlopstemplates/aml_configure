@@ -13,7 +13,6 @@ from azure.mgmt.resource.resources.models import DeploymentMode
 def test_get_deploy_mode_incremental():
   assert get_deploy_mode_obj("Incremental") == DeploymentMode.incremental
   
-  
 def test_get_deploy_mode_complete():
   assert get_deploy_mode_obj("Complete") == DeploymentMode.complete
 
@@ -31,6 +30,6 @@ def test_get_template_parameters_mapped_params_added():
     
 def test_get_template_parameters_incorrect_parameter_file():
     with pytest.raises(TemplateParameterException):
-        assert get_deploy_mode_obj("wrongFile.json",{})    
+        assert get_template_parameters("wrongFile.json",{})    
 
       
