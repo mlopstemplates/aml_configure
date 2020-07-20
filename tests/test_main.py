@@ -69,7 +69,7 @@ def test_main_invalid_parameters_filep():
         "clientId": "test",
         "clientSecret": "test",
         "subscriptionId": "test",
-        "tenantId"': "test"
+        "tenantId": "test"
     }"""
     os.environ["INPUT_RESOURCE_GROUP"] = "testGroup"
     with pytest.raises(CredentialsVerificationError):
