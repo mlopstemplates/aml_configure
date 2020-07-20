@@ -14,8 +14,8 @@ def get_sample_credentials():
         "clientId": "test",
         "clientSecret": "test",
         "subscriptionId": "test",
-        "tenantId"': "test"
-    }"""  
+        "tenantId": "test"
+    }""" 
 
 
 def test_main_no_input():
@@ -32,45 +32,26 @@ def test_main_invalid_azure_credentials():
         assert main()
 
 def test_main_resource_grp_not_provided():
-    os.environ["INPUT_AZURE_CREDENTIALS"] = """{
-        'clientId': 'test',
-        'clientSecret': 'test',
-        'subscriptionId': 'test',
-        'tenantId': 'test'
-    }"""
+    os.environ["INPUT_AZURE_CREDENTIALS"] = get_sample_credentials()
     with pytest.raises(AMLConfigurationException):
         assert main()
         
 def test_main_invalid_mapped_parameters():
-    os.environ["INPUT_AZURE_CREDENTIALS"] = """{
-        'clientId': 'test',
-        'clientSecret': 'test',
-        'subscriptionId': 'test',
-        'tenantId': 'test'
-    }"""
+    os.environ["INPUT_AZURE_CREDENTIALS"] = get_sample_credentials()
     os.environ["INPUT_MAPPED_PARAMS"] ="wrong mapped params"
     with pytest.raises(AMLConfigurationException):
         assert main()        
         
 
 def test_main_invalid_parameters_file():
-    os.environ["INPUT_AZURE_CREDENTIALS"] ="""{
-        'clientId': 'test',
-        'clientSecret': 'test',
-        'subscriptionId': 'test',
-        'tenantId': 'test'
-    }"""
+    os.environ["INPUT_AZURE_CREDENTIALS"] =get_sample_credentials()
     os.environ["INPUT_PARAMETERS_FILE"] = "wrongfile.json"
     with pytest.raises(AMLConfigurationException):
         assert main()
 
 def test_main_invalid_parameters_filep():        
-    os.environ["INPUT_AZURE_CREDENTIALS"] ="""{
-        "clientId": "test",
-        "clientSecret": "test",
-        "subscriptionId": "test",
-        "tenantId": "test"
-    }"""
+    os.environ["INPUT_AZURE_CREDENTIALS"] =get_sample_credentials()
+    os.environ["INPUT_MAPPED_PARAMS"] ={"testParams":"testValue"}
     os.environ["INPUT_RESOURCE_GROUP"] = "testGroup"
     with pytest.raises(CredentialsVerificationError):
         assert main()
