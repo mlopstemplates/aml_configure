@@ -47,6 +47,12 @@ def test_main_invalid_parameters_file():
     os.environ["INPUT_PARAMETERS_FILE"] = "wrongfile.json"
     with pytest.raises(AMLConfigurationException):
         assert main()
-        
-        
+
+def test_main_invalid_parameters_file():        
+    os.environ["INPUT_AZURE_CREDENTIALS"] =get_sample_credentials()
+    os.environ["INPUT_RESOURCE_GROUP"] = "testGroup"
+    with pytest.raises(CredentialsVerificationError):
+        assert main()
+
+    
         
