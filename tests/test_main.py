@@ -33,6 +33,7 @@ def test_main_invalid_azure_credentials():
 
 def test_main_resource_grp_not_provided():
     os.environ["INPUT_AZURE_CREDENTIALS"] = get_sample_credentials()
+    os.environ["INPUT_MAPPED_PARAMS"] ='{"testParams":"testValue"}'
     with pytest.raises(AMLConfigurationException):
         assert main()
         
@@ -45,6 +46,7 @@ def test_main_invalid_mapped_parameters():
 
 def test_main_invalid_parameters_file():
     os.environ["INPUT_AZURE_CREDENTIALS"] =get_sample_credentials()
+    os.environ["INPUT_MAPPED_PARAMS"] ='{"testParams":"testValue"}'
     os.environ["INPUT_PARAMETERS_FILE"] = "wrongfile.json"
     with pytest.raises(AMLConfigurationException):
         assert main()
