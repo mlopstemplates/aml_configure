@@ -63,11 +63,7 @@ def main():
     parameters=get_template_parameters(template_params_file,mapped_params)
     credentials=None
     try:
-        credentials = ServicePrincipalCredentials(
-             client_id=service_principal_id,
-             secret=service_principal_password,
-             tenant=tenant_id
-          )
+        credentials=get_service_principal_credentials(service_principal_id,service_principal_password,tenant_id)
     except Exception as ex:
        raise CredentialsVerificationError(ex)
     
