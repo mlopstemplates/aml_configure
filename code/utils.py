@@ -4,6 +4,7 @@ import importlib
 import json
 from json import JSONDecodeError
 from azure.mgmt.resource.resources.models import DeploymentMode
+from azure.common.credentials import ServicePrincipalCredentials
 
 class ActionDeploymentError(Exception):
     pass
