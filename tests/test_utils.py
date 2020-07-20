@@ -5,7 +5,7 @@ import pytest
 myPath = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(myPath, "..", "code"))
 
-from utils import AMLConfigurationException, InvalidDeploymentModeException
+from utils import AMLConfigurationException, InvalidDeploymentModeException ,get_deploy_mode_obj
 from json import JSONDecodeError
 from azure.mgmt.resource.resources.models import DeploymentMode
 
