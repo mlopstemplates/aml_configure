@@ -22,9 +22,6 @@ def test_get_deploy_mode_incremental():
   
 def test_get_deploy_mode_complete():
   assert get_deploy_mode_obj("Complete") == DeploymentMode.complete
-
-def test_get_deploy_mode_incremental():
-  assert get_deploy_mode_obj("Incremental") == DeploymentMode.incremental
   
 def test_get_deploy_mode_invalid_input():
   with pytest.raises(InvalidDeploymentModeException):
