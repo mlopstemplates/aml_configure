@@ -2,7 +2,7 @@ import os
 import json
 import time
 from json import JSONDecodeError
-from utils import AMLConfigurationException, ActionDeploymentError, CredentialsVerificationError, ResourceManagementError, required_parameters_provided, mask_parameter, get_template_parameters, get_deploy_mode_obj, get_service_principal_credentials
+from utils import AMLConfigurationException, ActionDeploymentError, CredentialsVerificationError, ResourceManagementError, required_parameters_provided, mask_parameter, get_template_parameters, get_deploy_mode_obj
 from azure.common.credentials import ServicePrincipalCredentials
 from azure.mgmt.resource import ResourceManagementClient
 from azure.mgmt.resource.resources.models import DeploymentMode
@@ -21,6 +21,7 @@ def main():
     deployment_name=deployment_name.split('/')
     deployment_name=deployment_name[0]+'_'+deployment_name[1]
     
+    deploy_enum=get_deploy_mode_obj(deployment_mode)
     try:
         azure_credentials = json.loads(azure_credentials)
     except JSONDecodeError:
@@ -63,7 +64,11 @@ def main():
     parameters=get_template_parameters(template_params_file,mapped_params)
     credentials=None
     try:
-        credentials=get_service_principal_credentials(service_principal_id,service_principal_password,tenant_id)
+        credentials = ServicePrincipalCredentials(
+             client_id=service_principal_id,
+             secret=service_principal_password,
+             tenant=tenant_id
+          )
     except Exception as ex:
        raise CredentialsVerificationError(ex)
     
@@ -77,7 +82,6 @@ def main():
     with open(template_file_file_path, 'r') as template_file_fd:
         template = json.load(template_file_fd)
         
-    deploy_enum=get_deploy_mode_obj(deployment_mode)        
     deployment_properties = {
         'properties':{
             'mode': deploy_enum,
