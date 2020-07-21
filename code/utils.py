@@ -4,7 +4,6 @@ import importlib
 import json
 from json import JSONDecodeError
 from azure.mgmt.resource.resources.models import DeploymentMode
-from azure.common.credentials import ServicePrincipalCredentials
 
 class ActionDeploymentError(Exception):
     pass
@@ -66,11 +65,3 @@ def required_parameters_provided(parameters, keys, message="Required parameter n
 def mask_parameter(parameter):
     print(f"::add-mask::{parameter}")
 
-def get_service_principal_credentials(service_principal_id,service_principal_password,tenant_id):
-    return ServicePrincipalCredentials(
-             client_id=service_principal_id,
-             secret=service_principal_password,
-             tenant=tenant_id
-          )
-    
-    
