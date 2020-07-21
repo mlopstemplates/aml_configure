@@ -1,6 +1,6 @@
 # Tests Actions to deploy ARM template to Azure
 name: arm-template-deploy
-on: [pull_request]
+on: [push]
 
 jobs:
   train:
