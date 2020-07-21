@@ -1,4 +1,4 @@
-name: Lint and Test
+name: Unit Tests
 on: [push, pull_request]
 jobs:
   lint:
