@@ -59,9 +59,12 @@ def test_main_invalid_credentials():
     with pytest.raises(CredentialsVerificationError):
         assert main()
 
-@mock.patch("main.get_deploy_mode_obj",return_value="check3",autospec=True)
-def test_main_invalid(mock_check):        
-    assert main() == "check"
+@mock.patch("main.ServicePrincipalCredentials",return_value="check3",autospec=True)
+def test_main_invalid(mock_check): 
+    os.environ["INPUT_AZURE_CREDENTIALS"] =get_sample_credentials()
+    os.environ["INPUT_MAPPED_PARAMS"] ='{"testParams":"testValue"}'
+    os.environ["INPUT_RESOURCE_GROUP"] = "testGroup"
+    assert main()
     
       
 
