@@ -8,7 +8,7 @@ myPath = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(myPath, "..", "code"))
 
 from main import main
-from utils import AMLConfigurationException, CredentialsVerificationError, ResourceManagementError, get_deploy_mode_obj
+from utils import AMLConfigurationException, CredentialsVerificationError, ResourceManagementError
 
 def get_sample_credentials():
     return """{
@@ -59,9 +59,9 @@ def test_main_invalid_credentials():
     with pytest.raises(CredentialsVerificationError):
         assert main()
 
-@mock.patch("utils.get_deploy_mode_obj",return_value="check",autospec=True)
+@mock.patch("main.get_deploy_mode_obj",return_value="check",autospec=True)
 def test_main_invalid(mock_check):        
-    assert get_deploy_mode_obj("incremental") == "check"
+    assert main() == "check"
     
       
 
