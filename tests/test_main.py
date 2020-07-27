@@ -1,13 +1,14 @@
 
 import os
 import sys
-import pytest 
+import pytest
+from unittest import mock
 
 myPath = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(myPath, "..", "code"))
 
 from main import main
-from utils import AMLConfigurationException, CredentialsVerificationError, ResourceManagementError
+from utils import AMLConfigurationException, CredentialsVerificationError, ResourceManagementError, get_deploy_mode_obj
 
 def get_sample_credentials():
     return """{
@@ -57,4 +58,10 @@ def test_main_invalid_credentials():
     os.environ["INPUT_RESOURCE_GROUP"] = "testGroup"
     with pytest.raises(CredentialsVerificationError):
         assert main()
+
+@mock.patch("utils.get_deploy_mode_obj",return_value="check",autospec=True)
+def test_main_invalid():        
+    assert get_deploy_mode_obj(obj) == "check"
+    
+      
 
