@@ -60,7 +60,7 @@ def test_main_invalid_credentials():
         assert main()
 
 @mock.patch("utils.get_deploy_mode_obj",return_value="check",autospec=True)
-def test_main_invalid():        
+def test_main_invalid(mock_check):        
     assert get_deploy_mode_obj(obj) == "check"
     
       
