@@ -59,7 +59,7 @@ def test_main_invalid_credentials():
     with pytest.raises(CredentialsVerificationError):
         assert main()
 
-@mock.patch("main.get_deploy_mode_obj",return_value="check",autospec=True)
+@mock.patch("main.get_deploy_mode_obj",return_value="check3",autospec=True)
 def test_main_invalid(mock_check):        
     assert main() == "check"
     
