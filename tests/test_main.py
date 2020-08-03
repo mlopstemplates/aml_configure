@@ -8,7 +8,7 @@ myPath = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(myPath, "..", "code"))
 
 from main import main
-from utils import AMLConfigurationException, CredentialsVerificationError, ResourceManagementError
+from utils import AMLConfigurationException, CredentialsVerificationError, ResourceManagementError, ActionDeploymentError
 
 def get_sample_credentials():
     return """{
@@ -64,7 +64,16 @@ def test_main_template_file_not_provided(mock_check):
     os.environ["INPUT_AZURE_CREDENTIALS"] =get_sample_credentials()
     os.environ["INPUT_MAPPED_PARAMS"] ='{"testParams":"testValue"}'
     os.environ["INPUT_RESOURCE_GROUP"] = "testGroup"
+    os.environ["INPUT_ARMTEMPLATE_FILE"] = "InvalidFile.json"    
     with pytest.raises(FileNotFoundError):
+        assert main()        
+        
+@mock.patch("main.ServicePrincipalCredentials",return_value="check3",autospec=True)
+def test_main_template_file_not_provided(mock_check): 
+    os.environ["INPUT_AZURE_CREDENTIALS"] =get_sample_credentials()
+    os.environ["INPUT_MAPPED_PARAMS"] ='{"testParams":"testValue"}'
+    os.environ["INPUT_RESOURCE_GROUP"] = "testGroup"
+    with pytest.raises(ActionDeploymentError):
         assert main()    
       
-
+ 
