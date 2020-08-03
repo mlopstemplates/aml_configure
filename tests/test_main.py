@@ -76,7 +76,7 @@ def test_main_validation_fails(mock_check):
     os.environ["INPUT_ARMTEMPLATE_FILE"] ="sample.json"
     d={}
     json_object=json.dumps(d) 
-    with open(".cloud/.azure/sample.json", "w") as outfile: 
+    with open(".cloud/.azure/sample1.json", "w") as outfile: 
         outfile.write(json_object)      
     
         
