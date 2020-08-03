@@ -64,22 +64,8 @@ def test_main_validation_fails(mock_check):
     os.environ["INPUT_AZURE_CREDENTIALS"] =get_sample_credentials()
     os.environ["INPUT_MAPPED_PARAMS"] ='{"testParams":"testValue"}'
     os.environ["INPUT_RESOURCE_GROUP"] = "testGroup"
- 
-
-        
-@mock.patch("main.ServicePrincipalCredentials",return_value="check3",autospec=True)
-def test_main_invalid_template_file_providedw(mock_check): 
-    os.environ["INPUT_AZURE_CREDENTIALS"] =get_sample_credentials()
-    os.environ["INPUT_MAPPED_PARAMS"] ='{"testParams":"testValue"}'
-    os.environ["INPUT_RESOURCE_GROUP"] = "testGroup"
     
-@mock.patch("main.ServicePrincipalCredentials",return_value="check3",autospec=True)
-def test_main_validation_fails(mock_check): 
-    os.environ["INPUT_AZURE_CREDENTIALS"] =get_sample_credentials()
-    os.environ["INPUT_MAPPED_PARAMS"] ='{"testParams":"testValue"}'
-    os.environ["INPUT_RESOURCE_GROUP"] = "testGroup"
-    with pytest.raises(ActionDeploymentError):
-        assert main()      
+   
 @mock.patch("main.ServicePrincipalCredentials",return_value="check3",autospec=True)
 def test_main_invalid_template_file_provided(mock_check): 
     os.environ["INPUT_AZURE_CREDENTIALS"] =get_sample_credentials()
