@@ -8,7 +8,7 @@ myPath = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(myPath, "..", "code"))
 
 from main import main
-from utils import AMLConfigurationException, CredentialsVerificationError, ResourceManagementError
+from utils import AMLConfigurationException, CredentialsVerificationError, ResourceManagementError, ActionDeploymentError
 
 def get_sample_credentials():
     return """{
