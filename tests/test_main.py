@@ -60,7 +60,7 @@ def test_main_invalid_credentials():
         assert main()
         
 @mock.patch("main.ServicePrincipalCredentials",return_value="check3",autospec=True)
-def test_main_template_file_not_provided(mock_check): 
+def test_main_invalid_template_file_provided(mock_check): 
     os.environ["INPUT_AZURE_CREDENTIALS"] =get_sample_credentials()
     os.environ["INPUT_MAPPED_PARAMS"] ='{"testParams":"testValue"}'
     os.environ["INPUT_RESOURCE_GROUP"] = "testGroup"
@@ -69,7 +69,7 @@ def test_main_template_file_not_provided(mock_check):
         assert main()        
         
 @mock.patch("main.ServicePrincipalCredentials",return_value="check3",autospec=True)
-def test_main_template_file_not_provided(mock_check): 
+def test_main_validation_fails(mock_check): 
     os.environ["INPUT_AZURE_CREDENTIALS"] =get_sample_credentials()
     os.environ["INPUT_MAPPED_PARAMS"] ='{"testParams":"testValue"}'
     os.environ["INPUT_RESOURCE_GROUP"] = "testGroup"
@@ -77,6 +77,7 @@ def test_main_template_file_not_provided(mock_check):
         assert main()
 
 @mock.patch("main.ServicePrincipalCredentials",return_value="check3",autospec=True)
+@mock.patch("main.ResourceManagementClient.deployments",return_value="check3",autospec=True)
 def test_main_template_file_not_provided(mock_check): 
     os.environ["INPUT_AZURE_CREDENTIALS"] =get_sample_credentials()
     os.environ["INPUT_MAPPED_PARAMS"] ='{"testParams":"testValue"}'
