@@ -64,7 +64,7 @@ def test_main_template_file_not_provided(mock_check):
     os.environ["INPUT_AZURE_CREDENTIALS"] =get_sample_credentials()
     os.environ["INPUT_MAPPED_PARAMS"] ='{"testParams":"testValue"}'
     os.environ["INPUT_RESOURCE_GROUP"] = "testGroup"
-    with pytest.raises(ActionDeploymentError):
+    with pytest.raises(FileNotFoundError):
        assert main()
     
 @mock.patch("main.ServicePrincipalCredentials",return_value="check3",autospec=True)
@@ -73,5 +73,5 @@ def test_main_template_file_not_provided(mock_check):
     os.environ["INPUT_MAPPED_PARAMS"] ='{"testParams":"testValue"}'
     os.environ["INPUT_RESOURCE_GROUP"] = "testGroup"
     os.environ["INPUT_ARMTEMPLATE_FILE"] = "InvalidFile.json"    
-    with pytest.raises(ActionDeploymentError):
+    with pytest.raises(FileNotFoundError):
        assert main()
