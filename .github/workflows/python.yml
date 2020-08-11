@@ -1,0 +1,22 @@
+name: Unit Tests
+on: [push, pull_request]
+jobs:
+  lint:
+    name: Lint and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Python 3.7
+        id: python_setup
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.7"
+
+      - name: Check Out Repository
+        id: checkout_repository
+        uses: actions/checkout@v1
+      
+      - name: Test
+        id: python_test
+        run: |
+          pip install pytest pytest-mock jsonschema azureml-sdk 
+          pytest

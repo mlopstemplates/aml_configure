@@ -10,7 +10,7 @@ from azure.mgmt.resource.resources.models import DeploymentMode
 def main():
     # # Loading input values
     # print("::debug::Loading input values")
-    template_file = os.environ.get("INPUT_ARMTEMPLATE_FILE", default="arm_deploy.json")
+    template_file = os.environ.get("INPUT_ARMTEMPLATE_FILE", default="deploy.json")
     template_params_file = os.environ.get("INPUT_ARMTEMPLATEPARAMS_FILE", default="")
     azure_credentials = os.environ.get("INPUT_AZURE_CREDENTIALS", default="{}")
     resource_group = os.environ.get("INPUT_RESOURCE_GROUP", default=None)
